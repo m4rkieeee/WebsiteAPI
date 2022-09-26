@@ -91,7 +91,7 @@
                                         <button type="submit" name="btnLogin" class="col s12 btn btn-large waves-effect indigo">Login</button>
                                     </div>
                                     <div class="row">
-                                        <a href="../register/index.html">Register</a>
+                                        <a href="{{ url('/registration') }}">Register</a>
                                     </div>
                                 </center>
                             </form>
