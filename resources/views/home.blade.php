@@ -1,107 +1,159 @@
 @extends('layouts.app')
-
+@section('title', 'Home')
 @section('content')
+    <html>
     <head>
-        <title>Register</title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{asset('css/materialize.min.css')}}"  media="screen,projection"/>
 
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
         <style>
+
             html {
                 font-family: Fantasy;
             }
-            body {
-                display: flex;
-                min-height: 100vh;
-                flex-direction: column;
+            div {
+                z-index: 10;
             }
-
-            main {
-                flex: 1 0 auto;
-            }
-
-            body {
-                background: #ffffff;
-            }
-
-            .input-field input[type=text]:focus + label,
-            .input-field input[type=password]:focus + label {
-                color: #1E88E5;
-            }
-
-            .input-field input[type=text]:focus,
-            .input-field input[type=password]:focus {
-                border-bottom: 1px solid #1E88E5;
-                box-shadow: none;
-            }
-
             #bgimage {
+                z-index: 0;
                 height: 100%;
                 width: 100%;
                 mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
+            }
+            .nav-wrapper{
+                z-index: 99;
+            }
+
+            #youtube:hover, #github:hover, #youtube1:hover, #github1:hover, #youtube2:hover, #github2:hover
+            {
+                background-color: rgba(0,0,0,0.1);
+                border-radius: 5px;
+            }
+            .card-action {
+                text-align: center;
+            }
+
+            .card-title {
+                text-align: center;
+            }
+            .card {
+
+                user-select: none; /* supported by Chrome and Opera */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+            }
+            img {
+                max-width: 100%;
+                max-height: 100%;
             }
         </style>
     </head>
 
     <body>
-    <img src="./img/login.jpg" id="bgimage" style="z-index: 1; position: absolute; background: linear-gradient(black, white)">
-    <div class="section" style="z-index: 10;">
-        <main>
-            <div style="text-align: center;">
-                <img src="./img/logoipsum.png" class="responsive-img" style="width: 250px;"/>
-                <div class="section">
-                    <div class="section"></div>
-                    <div class="container">
-                        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; width: 36.3%; padding: 32px 48px 0px 48px; border: 1px solid #000000">
-                            <form class="col s12" method="post">
-                                <div class="row">
-                                    <div class="col s12">
+    <img src="{{ asset('img/login.jpg') }}" id="bgimage" style=" position: absolute; background: linear-gradient(black, white)">
+    <nav>
+        <div class="nav-wrapper blue">
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="tiny material-icons prefix">account_circle</i>
-                                        <input class="validate" type="text" name="username" id="username">
-                                        <label for="username" class="">Username</label>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom: 5px">
-                                    <div class="input-field col s12">
-                                        <i class="tiny material-icons prefix">vpn_key</i>
-                                        <input class="validate" type="password" name="password" id="password" />
-                                        <label for="password" class="">Password
-                                        </label>
-                                    </div>
-                                    <label style="float: right">
-                                        <br />
-                                    </label>
-                                </div>
-                                <br />
-                                <center>
-                                    <div class="row">
-                                        <button type="submit" name="btnRegister" class="col s12 btn btn-large waves-effect indigo">Register</button>
-                                    </div>
-                                    <div class="row">
-                                        <a href="../login/index.html">Login</a>
-                                    </div>
-                                </center>
-                            </form>
-                        </div>
-                    </div>
+            <div class="container">
+                <a href="./index.html" class="brand-logo">Fased</a>
+                <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
+                <ul class="hide-on-med-and-down right" id="navSelector">
+                    <li class="active"><a href="../dashboard/index.html">Home</a></li>
+                    <li><a href="../login/index.html">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-wrapper">
+        <ul class="sidenav blue" id="slide_out">
+            <li class="active"><a href="#" class="white-text"><i class="material-icons white-text">home</i>Home</a></li>
+            <li><a href="#" class="white-text"><i class="material-icons white-text">group</i>About</a></li>
+            <li><a href="#" class="white-text"><i class="material-icons white-text">email</i>Contact</a></li>
+            <li><a href="#" class="white-text"><i class="material-icons white-text">logout</i>Sign Out</a></li>
+
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="card white">
+                <div class="card-content">
+                    <span class="card-title">This is a website.</span>
+                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
+                    <br />
+                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube1" class="black-text"><b>Youtube</b></a>
+                    <a href="https://github.com/m4rkieeee" id="github1" class="black-text"><b>Github</b></a>
                 </div>
             </div>
-        </main>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card blue">
+                <div class="card-content white-text">
+                    <span class="card-title">This is a website.</span>
+                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
+                    <br />
+                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube" class="white-text"><b>Youtube</b></a>
+                    <a href="https://github.com/m4rkieeee" id="github" class="white-text"><b>Github</b></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card blue">
+                <div class="card-content white-text">
+                    <span class="card-title">This is a website.</span>
+                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
+                    <br />
+                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube2" class="white-text"><b>Youtube</b></a>
+                    <a href="https://github.com/m4rkieeee" id="github2" class="white-text"><b>Github</b></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.js"></script>
+
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="card blue">
+                <div class="card-image">
+                    <img src="{{asset('img/pf-logo.jpg')}}">
+                    <span class="card-title ">You can give this a title and it'll work. I wonder how long I can make this actually, any guesses?</span>
+                </div>
+                <div class="card-content white-text">
+                    <span>I like writing this down in here so that I know how it will look like in the end, but apparently this isn't enough for a second row but maybe now?</span>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card blue">
+                <div class="card-image blue waves-effect waves-block waves-light">
+                    <img class="activator" src="{{asset('img/pf-logo.jpg')}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator white-text text-darken-4">If you click this, it opens.<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal blue white-text">
+                    <span class="card-title blue-text">If you hit the close icon, it closes.<i class="material-icons right white-text">close</i></span>
+                    <p>I like writing this down in here so that I know how it will look like in the end, but apparently this isn't enough for a second row but maybe now?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ asset('js/materialize.js') }}"></script>
     </body>
     </html>
-
 @endsection

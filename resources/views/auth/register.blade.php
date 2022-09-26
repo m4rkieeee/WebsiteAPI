@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
+@section('title', 'Register')
 @section('content')
     <html>
     <head>
-        <title>Register</title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
@@ -61,7 +60,6 @@
                     <div class="section"></div>
                     <div class="container">
                         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; width: 36.3%; padding: 32px 48px 0px 48px; border: 1px solid #000000">
-                            <form class="col s12" method="post">
                                 <div class="row">
                                     <div class="col s12">
                                         <form role="form" class="text-start" method="POST" action="{{ route('register.custom') }}">
@@ -107,6 +105,8 @@
                                     </div>
                                 </center>
                             </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
