@@ -34,8 +34,16 @@ class AuthController extends Controller
 
         }
     }
+    public function registration()
+    {
+        if (auth()->user()) {
+            return redirect('/');
+        } else {
+            return view('auth.register');
+        }
+    }
 
-    public function customRegistration(Request $request)
+    public function customRegistration(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:users',

@@ -3,9 +3,6 @@
 @section('content')
     <html>
     <head>
-        <title>Login</title>
-        <!--Import Google Icon Font-->
-
         <style>
             html {
                 font-family: Fantasy;
@@ -40,7 +37,7 @@
                 height: 100%;
                 width: 100%;
                 mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
-                z-index: 0;
+                z-index: -1;
             }
         </style>
     </head>
@@ -55,7 +52,7 @@
                     <div class="section"></div>
                     <div class="container">
                         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0 48px;background-color: white; border: 1px solid #000000;">
-                            <form role="form" class="col s12" method="POST" action="{{ route('login.custom') }}">
+                            <form role="form" method="POST" action="{{ route('login.custom') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col s12">
