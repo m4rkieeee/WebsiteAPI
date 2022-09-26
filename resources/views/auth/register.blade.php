@@ -83,7 +83,7 @@
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="input-field col s12">
                                                     <i class="tiny material-icons prefix">vpn_key</i>
-                                                    <input class="validate" type="password" name="password" id="password" @if ($errors->has('password')) is-invalid @elseif(session()->has('invalidPassword')) is-invalid @endif />
+                                                    <input class="validate" type="password" name="password" id="password" />
                                                     <label for="password" class="">Password
                                                     </label>
                                                 </div>
