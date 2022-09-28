@@ -46,3 +46,10 @@ img {
 #logoNav {
     width: 90px;
 }
+.datepicker-done, .datepicker-cancel {
+        color: #2196f3;
+    }
+
+.datepicker-date-display, .datepicker-table td.is-selected{
+    background-color: #2196f3;
+}
