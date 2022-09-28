@@ -43,5 +43,11 @@ class todoController extends Controller
 
             return 'success';
         }
+
+        if ($request->type == 'deleteCard') {
+            $todo = Todo::where('id', $request->todoID);
+            $todo->delete();
+        }
+        return 'success';
     }
 }

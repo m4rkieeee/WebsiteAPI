@@ -36,14 +36,16 @@
                     <div class="card white">
                         <div class="card-content">
                             <span class="card-title">{{ $todos->taskName }}</span>
+                            <span class="card-title right"><button class="material-icons amber-text btn-floating white">mode</button> <button id="{{ $todos->id }}" name="deleteTodo" class="material-icons red-text btn-floating white">close</button></span>
                             <span class="card-content"><b>{{ $todos->taskDescription }}</b></span>
                             <br/>
+                            <br>
                             <hr>
-                            <span class="card-content"><b>Starting:</b> {{ $todos->startdate->format('d F Y') }}</span>
+                            <span class="card-content"><b>Starting:</b> {{ $todos->startdate->format('d F Y')}}</span>
                             <br/>
-                            <span class="card-content"><b>Ending:</b> {{ $todos->enddate->format('d F Y') }}</span>
+                            <span class="card-content"><b>Ending:</b> {{ $todos->enddate->format('d F Y')}}</span>
                             <br />
-                            <span class="card-content"><b>Posted by: </b>{{$todos->user->name}}</span>
+                            <span class="card-content"><b>Posted by: </b>{{$todos->user->name ?? 'No cards here'}}</span>
                             @if(auth()->user()->id === $todos->user_id && $todos->done === 0)
                                 <button type="button" class="btn-small right blue" id="{{ $todos->id }}" name="finishTodo">Done?</button>
                             @elseif($todos->done === 0)
@@ -119,6 +121,26 @@
                 })
             });
 
+            $(document).on('click', 'button[name=deleteTodo]', function (e) {
+                var id = $(this).attr('id');
+                $.ajax({
+                    url: "{{ route('todo.actions') }}",
+                    type: 'POST',
+                    method: 'DELETE',
+                    data: {
+                        type: 'deleteCard',
+                        todoID: id,
+                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                })
+            });
+
             $(document).on('click', '#addPost', function (e) {
                 $.ajax({
                     url: "{{ route('todo.actions') }}",
@@ -141,11 +163,12 @@
                                         <span class="card-content"><b>' + data['taskDescription'] + '</b></span>\
                                         <br />\
                                         <hr />\
+                                        <br>\
                                         <span class="card-content">Starting: ' + moment(data['startdate']).format('D MMMM YYYY h:mm') + '</span>\
                                         <br />\
                                         <span class="card-content">Ending: ' + moment(data['enddate']).format('D MMMM YYYY h:mm') + '</span>\
                                         <br />\
-                                                                    <span class="card-content"><b>Posted by: </b>{{$todos->user->name}}</span>\
+                                                                    <span class="card-content"><b>Posted by: </b>{{$todos->user->name?? ''}}</span>\
                                         <button type="button" class="btn-small right blue">Done?</button>\
                                     </div>\
                                 </div>\
