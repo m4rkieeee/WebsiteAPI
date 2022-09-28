@@ -36,7 +36,7 @@
                     <div class="card white">
                         <div class="card-content">
                             <span class="card-title">{{ $todos->taskName }}</span>
-                            <span class="card-title right"><button data-target="modalEdit" class="modal-trigger material-icons amber-text btn-floating white" id="{{ $todos->id }}" name="editTodo">mode</button> <button id="{{ $todos->id }}" name="deleteTodo" class="material-icons red-text btn-floating white">close</button></span>
+                            <span class="card-title right"><button class="material-icons amber-text btn-floating white" id="{{ $todos->id }}" name="editTodo">mode</button> <button id="{{ $todos->id }}" name="deleteTodo" class="material-icons red-text btn-floating white">close</button></span>
                             <span class="card-content"><b>{{ $todos->taskDescription }}</b></span>
                             <br/>
                             <br>
@@ -97,22 +97,22 @@
         <div id="modalEdit" class="modal">
             <div class="modal-content">
                 <h4>Edit Post</h4>
-                <input type="hidden" id="type" value="editCard">
+                <input type="hidden" id="editCardID">
                 <div class="input-field col s6 ">
                     <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="todoTaskName" class="materialize-textarea" value="{{ $todos->taskName }}"></textarea>
+                    <textarea id="todoTaskNameEdit" class="materialize-textarea"></textarea>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">comment</i>
-                    <textarea id="todoTaskDescription" class="materialize-textarea" value="{{ $todos->taskDescription }}"></textarea>
+                    <textarea id="todoTaskDescriptionEdit" class="materialize-textarea"></textarea>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">date_range</i>
-                    <input type="text" class="datepicker" id="todoStartDate" value="{{$todos->startDate}}">
+                    <input type="text" class="datepicker" id="todoStartDateEdit">
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">date_range</i>
-                    <input type="text" class="datepicker" id="todoEndDate" value="{{$todos->endDate}}">
+                    <input type="text" class="datepicker" id="todoEndDateEdit">
                 </div>
 
             </div>
@@ -130,6 +130,8 @@
             $('#modalEdit').modal();
             $('#todoStartDate').datepicker();
             $('#todoEndDate').datepicker();
+            $('#todoStartDateEdit').datepicker();
+            $('#todoEndDateEdit').datepicker();
 
             $(document).on('click', 'button[name=finishTodo]', function (e) {
                 var id = $(this).attr('id');
@@ -170,21 +172,46 @@
                 })
             });
 
+            $(document).on('click', 'button[name=editTodo]', function (e) {
+                var id = $(this).attr('id');
+                $.ajax({
+                    url: "{{ route('todo.actions') }}",
+                    type: 'POST',
+                    data: {
+                        type: 'getCardInfo',
+                        todoID: id,
+                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function (data) {
+                        $('#modalEdit').modal('open');
+                        $('#editCardID').val(data['id']);
+                        $('#todoTaskNameEdit').text(data['taskName']);
+                        $('#todoTaskDescriptionEdit').text(data['taskDescription']);
+                        $('#todoStartDateEdit').val(moment(data['startdate']).format('D MMMM YYYY h:mm'));
+                        $('#todoEndDateEdit').val(moment(data['enddate']).format('D MMMM YYYY h:mm'));
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                })
+            });
+
             $(document).on('click', '#editCard', function (e) {
                 $.ajax({
                     url: "{{ route('todo.actions') }}",
                     type: 'POST',
                     data: {
                         type: 'editCard',
-                        taskName: $('#todoTaskName').val(),
-                        taskDescription: $('#todoTaskDescription').val(),
-                        startDate: $('#todoStartDate').val(),
-                        endDate: $('#todoEndDate').val(),
-                        todoID: id,
+                        taskName: $('#todoTaskNameEdit').val(),
+                        taskDescription: $('#todoTaskDescriptionEdit').val(),
+                        startDate: $('#todoStartDateEdit').val(),
+                        endDate: $('#todoEndDateEdit').val(),
+                        todoID: $('#editCardID').val(),
 
                     },
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success: function (data) {
+                        location.reload();
                     },
                     error: function (data) {
                         console.log(data);

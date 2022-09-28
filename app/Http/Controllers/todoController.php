@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class todoController extends Controller
@@ -33,7 +34,6 @@ class todoController extends Controller
 
             return $todo;
 
-            return 'success';
         }
 
         if ($request->type == 'finishTodo') {
@@ -56,8 +56,12 @@ class todoController extends Controller
             Todo::where('id', $request->todoID)->update([
                 'taskName' => $request->taskName,
                 'taskDescription' => $request->taskDescription,
-                'startdate' => $request->startDate,
-                'enddate' => $request->endDate
-            ]);}
+                'startdate' => Carbon::parse($request->startDate),
+                'enddate' => Carbon::parse($request->endDate),
+            ]);
+        }
+        if ($request->type == 'getCardInfo') {
+            return Todo::where('id', $request->todoID)->firstOrFail();
+        }
     }
 }
