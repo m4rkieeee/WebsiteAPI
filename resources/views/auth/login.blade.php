@@ -1,48 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Login')
+@section('title', 'Home')
 @section('content')
-    <html>
-    <head>
-        <style>
-            html {
-                font-family: Fantasy;
-            }
-            body {
-                display: flex;
-                min-height: 100vh;
-                flex-direction: column;
-            }
-
-            main {
-                flex: 1 0 auto;
-                z-index: 10;
-            }
-
-            body {
-                background: #ffffff;
-            }
-
-            .input-field input[type=text]:focus + label,
-            .input-field input[type=password]:focus + label {
-                color: #1E88E5;
-            }
-
-            .input-field input[type=text]:focus,
-            .input-field input[type=password]:focus {
-                border-bottom: 1px solid #1E88E5;
-                box-shadow: none;
-            }
-
-            #bgimage {
-                height: 100%;
-                width: 100%;
-                mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
-                z-index: -1;
-            }
-        </style>
-    </head>
-
-    <body>
     <img src="{{ asset('img/login.jpg') }}" id="bgimage" style="position: absolute; background: linear-gradient(black, white)">
     <div class="section" style="z-index: 10;">
         <main>

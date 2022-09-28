@@ -1,56 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Register')
 @section('content')
-    <html>
-    <head>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="{{asset('css/materialize.min.css')}}"  media="screen,projection"/>
-
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-        <style>
-            html {
-                font-family: Fantasy;
-            }
-            body {
-                display: flex;
-                min-height: 100vh;
-                flex-direction: column;
-            }
-
-            main {
-                flex: 1 0 auto;
-            }
-
-            body {
-                background: #ffffff;
-            }
-
-            .input-field input[type=text]:focus + label,
-            .input-field input[type=password]:focus + label {
-                color: #1E88E5;
-            }
-
-            .input-field input[type=text]:focus,
-            .input-field input[type=password]:focus {
-                border-bottom: 1px solid #1E88E5;
-                box-shadow: none;
-            }
-
-            #bgimage {
-                height: 100%;
-                width: 100%;
-                mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
-                z-index: -1;
-            }
-        </style>
-    </head>
-
-    <body>
     <img src="{{ asset('img/login.jpg') }}" id="bgimage" style=" position: absolute; background: linear-gradient(black, white)">
     <div class="section">
         <main>
@@ -101,7 +51,7 @@
                                         <button type="submit" name="btnRegister" class="col s12 btn btn-large waves-effect indigo">Register</button>
                                     </div>
                                     <div class="row">
-                                        <a href="../login/index.html">Login</a>
+                                        <a href="{{ url('./login') }}">Login</a>
                                     </div>
                                 </center>
                             </form>

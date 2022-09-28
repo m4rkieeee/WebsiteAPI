@@ -13,14 +13,11 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom');
 Route::get('registration', [AuthController::class, 'registration'])->name('register.user');
 Route::post('custom-registration', [AuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('todo/actions', [App\Http\Controllers\todoController::class, 'actions'])->name('todo.actions');
+Route::get('signout', [AuthController::class, 'signOut'])->name('signOut');
+

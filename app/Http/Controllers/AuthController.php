@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function index()
     {
         if (auth()->user()) {
-            return redirect('/');
+            return redirect('/home');
 
         } else {
             return view('auth.login');
@@ -28,7 +28,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('')->withSuccess('Signed in!');
+            return redirect()->intended('/home')->withSuccess('Signed in!');
         } else {
             return redirect()->back()->with('invalidPassword', 'Invalid username or password!');
 
@@ -37,7 +37,7 @@ class AuthController extends Controller
     public function registration()
     {
         if (auth()->user()) {
-            return redirect('/');
+            return redirect('/home');
         } else {
             return view('auth.register');
         }
@@ -62,7 +62,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('')->withSuccess('Signed in!');
+            return redirect()->intended('/home')->withSuccess('Signed in!');
         } else {
             return redirect()->back()->with('success', 'User created!');
         }
