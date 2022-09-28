@@ -17,7 +17,7 @@ class todoController extends Controller
         return view('post', $resources);
     }
 
-    public function actions(Request $request, $id)
+    public function actions(Request $request)
     {
         if ($request->type == 'addPost') {
             $todo = new Todo;
@@ -30,6 +30,14 @@ class todoController extends Controller
             $todo->save();
 
             return $todo;
+
+            return 'success';
+        }
+
+        if ($request->type == 'finishTodo') {
+            Todo::where('id', $request->todoID)->update([
+                'done' => 1
+            ]);
 
             return 'success';
         }
