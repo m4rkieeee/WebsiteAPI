@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "95b694b18e97667437a84c0f7c711826",
+    "content-hash": "e03a5121160526507b5df8a50895ac37",
     "packages": [
         {
             "name": "brick/math",
@@ -896,6 +896,38 @@
                 }
             ],
             "time": "2022-08-28T14:45:39+00:00"
+        },
+        {
+            "name": "jorgejavierleon/laravelpnotify",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jorgejavierleon/LaravelPnotify.git",
+                "reference": "623bb6b374e57266369722d1344a809a10d73c9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jorgejavierleon/LaravelPnotify/zipball/623bb6b374e57266369722d1344a809a10d73c9a",
+                "reference": "623bb6b374e57266369722d1344a809a10d73c9a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "benconstable/phpspec-laravel": "~2.0",
+                "phpspec/phpspec": "~2.0",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jleon\\LaravelPnotify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/jorgejavierleon/LaravelPnotify/issues",
+                "source": "https://github.com/jorgejavierleon/LaravelPnotify/tree/1.0"
+            },
+            "time": "2015-09-25T11:57:01+00:00"
         },
         {
             "name": "laravel/framework",

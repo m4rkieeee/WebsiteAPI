@@ -65,8 +65,7 @@
                 <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down right" id="navSelector">
                     <li class="active"><a href="../dashboard/index.html">Home</a></li>
-                    <li><a href="../login/index.html">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a data-bs-toggle="modal" data-bs-target="#addPostModal">New Post</a></li>
                     <li><a href="#">Sign Out</a></li>
                 </ul>
             </div>
@@ -82,78 +81,83 @@
         </ul>
     </div>
     <div class="row">
+        @foreach($todo as $todos)
         <div class="col s12 m6 l4">
             <div class="card white">
                 <div class="card-content">
-                    <span class="card-title">This is a website.</span>
-                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
+                    <span class="card-title">{{ $todos->taskName }}</span>
+                    <span class="card-content"><b>{{ $todos->taskDescription }}</b></span>
                     <br />
-                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
-                </div>
-                <div class="card-action">
-                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube1" class="black-text"><b>Youtube</b></a>
-                    <a href="https://github.com/m4rkieeee" id="github1" class="black-text"><b>Github</b></a>
+                    <br />
+                    <span class="card-content">Starting: {{ $todos->startdate->format('d F Y, H:i') }}</span>
+                    <br />
+                    <span class="card-content">Ending: {{ $todos->enddate->format('d F Y, H:i') }}</span>
+                    <button type="button" class="btn-small right">Done?</button>
                 </div>
             </div>
         </div>
-        <div class="col s12 m6 l4">
-            <div class="card blue">
-                <div class="card-content white-text">
-                    <span class="card-title">This is a website.</span>
-                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
-                    <br />
-                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
-                </div>
-                <div class="card-action">
-                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube" class="white-text"><b>Youtube</b></a>
-                    <a href="https://github.com/m4rkieeee" id="github" class="white-text"><b>Github</b></a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m6 l4">
-            <div class="card blue">
-                <div class="card-content white-text">
-                    <span class="card-title">This is a website.</span>
-                    <span class="card-content">Here I can input some text without any issues, because life is great.</span>
-                    <br />
-                    <span class="card-content">Want to know more? Don't be afraid to check my Youtube and Github below.</span>
-                </div>
-                <div class="card-action">
-                    <a href="https://www.youtube.com/channel/UCQpvcYJ6fR5BXJbjl4NWoMw" id="youtube2" class="white-text"><b>Youtube</b></a>
-                    <a href="https://github.com/m4rkieeee" id="github2" class="white-text"><b>Github</b></a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
-    <div class="row">
-        <div class="col s12 m6 l4">
-            <div class="card blue">
-                <div class="card-image">
-                    <img src="{{asset('img/pf-logo.jpg')}}">
-                    <span class="card-title ">You can give this a title and it'll work. I wonder how long I can make this actually, any guesses?</span>
-                </div>
-                <div class="card-content white-text">
-                    <span>I like writing this down in here so that I know how it will look like in the end, but apparently this isn't enough for a second row but maybe now?</span>
+    @if(Auth()->check())
+        <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="type" value="addPost">
+                        <div class="form-group">
+                            <label for="todoTaskName">Post Title</label>
+                            <input type="text" class="form-control" id="todoTaskName" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="todoTaskDescription">Post Text</label>
+                            <textarea type="text" class="form-control" id="todoTaskDescription" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="addPost" data-bs-dismiss="modal">Add Post</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col s12 m6 l4">
-            <div class="card blue">
-                <div class="card-image blue waves-effect waves-block waves-light">
-                    <img class="activator" src="{{asset('img/pf-logo.jpg')}}">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator white-text text-darken-4">If you click this, it opens.<i class="material-icons right">more_vert</i></span>
-                </div>
-                <div class="card-reveal blue white-text">
-                    <span class="card-title blue-text">If you hit the close icon, it closes.<i class="material-icons right white-text">close</i></span>
-                    <p>I like writing this down in here so that I know how it will look like in the end, but apparently this isn't enough for a second row but maybe now?</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
     <script type="text/javascript" src="{{ asset('js/materialize.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#addPost').on('click', function () {
+                $.ajax({
+                    url: "{{ route('todo.actions') }}",
+                    type: 'POST',
+                    data: {
+                        type: 'addPost',
+                        postTitle: $('#todoTaskName').val(),
+                        postText: $('#todoTaskDescription').val(),
+                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function (data) {
+                        console.log(data);
+                        $('#postRows').append(
+                            ' <div class="row mt-2 rounded">\
+                                <div class="col-xl-8 mx-auto border border-dark p-3 pb-0 rounded">\
+                                     <p style="margin-bottom:-2px;"><i class="fa-regular fa-file fa-lg me-1"></i><a href="/post/' + data + '">' + $('#todoTaskName').val() + '</a> <small class="float-end">Comments: <b>0</b></small></p>\
+                                         <p><small>By <b>{{ Auth()->user()->name ?? 'Guest' }}</b> » ' + moment().format('D MMM YYYY, H:mm') + '</small> <small class="float-end right-0">Views: <b>0</b></small></p>\
+                                    </div>\
+                                </div');
+                        $('#todoTaskName').val('');
+                        $('#todoTaskDescription').val('');
+                    },
+                    error: function (data) {
+                        console.log(data);
+                        },
+                    })
+                });
+            });
+        </script>
     </body>
     </html>
 @endsection

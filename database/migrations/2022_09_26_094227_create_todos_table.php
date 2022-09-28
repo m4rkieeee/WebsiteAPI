@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('todo', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->longText('task');
+            $table->longText('taskName');
+            $table->longText('taskDescription');
             $table->dateTime('startdate');
             $table->dateTime('enddate');
             $table->boolean('done');
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todo');
+        Schema::dropIfExists('todos');
     }
 };

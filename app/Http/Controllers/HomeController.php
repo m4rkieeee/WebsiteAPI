@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $todo = Todo::all();
+        $users = User::all();
+        return view('home', compact('users', 'todo'));
     }
 }
