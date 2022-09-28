@@ -9,7 +9,6 @@ class Todo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['task', 'done'];
     protected $dates = ['startdate', 'enddate'];
     public function user()
     {

@@ -17,14 +17,19 @@ class todoController extends Controller
     }
 
     public function actions(Request $request) {
-        if($request->type == 'AddPost') {
+        if($request->type == 'addPost') {
             $todo = new Todo;
             $todo->user_id = Auth()->id();
-            $todo->taskName = $request->todoTaskName;
-            $todo->taskDescription = $request->todoTaskDescription;
+            $todo->taskName = $request->taskName;
+            $todo->taskDescription = $request->taskDescription;
             $todo->startdate = $request->startDate;
             $todo->enddate = $request->endDate;
             $todo->done = 0;
+            $todo->save();
+
+            return $todo;
+
+            return 'success';
         }
     }
 }
