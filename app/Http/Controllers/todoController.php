@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class todoController extends Controller
 {
-    public function index($id) {
+    public function index($id)
+    {
         $todo = Todo::with('user')->where('id', $id)->firstOrFail();
 
         $resources = [
@@ -16,8 +17,9 @@ class todoController extends Controller
         return view('post', $resources);
     }
 
-    public function actions(Request $request) {
-        if($request->type == 'addPost') {
+    public function actions(Request $request, $id)
+    {
+        if ($request->type == 'addPost') {
             $todo = new Todo;
             $todo->user_id = Auth()->id();
             $todo->taskName = $request->taskName;

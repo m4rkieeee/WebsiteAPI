@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\todoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -20,4 +21,3 @@ Route::post('custom-registration', [AuthController::class, 'customRegistration']
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('todo/actions', [App\Http\Controllers\todoController::class, 'actions'])->name('todo.actions');
 Route::get('signout', [AuthController::class, 'signOut'])->name('signOut');
-
