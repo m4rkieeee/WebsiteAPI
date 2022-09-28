@@ -36,7 +36,7 @@
                     <div class="card white">
                         <div class="card-content">
                             <span class="card-title">{{ $todos->taskName }}</span>
-                            <span class="card-title right"><button class="material-icons amber-text btn-floating white">mode</button> <button id="{{ $todos->id }}" name="deleteTodo" class="material-icons red-text btn-floating white">close</button></span>
+                            <span class="card-title right"><button data-target="modalEdit" class="modal-trigger material-icons amber-text btn-floating white" id="{{ $todos->id }}" name="editTodo">mode</button> <button id="{{ $todos->id }}" name="deleteTodo" class="material-icons red-text btn-floating white">close</button></span>
                             <span class="card-content"><b>{{ $todos->taskDescription }}</b></span>
                             <br/>
                             <br>
@@ -93,12 +93,41 @@
                 <a href="#" class="waves-effect waves-green btn-flat" id="addPost">Add Post</a>
             </div>
         </div>
+
+        <div id="modalEdit" class="modal">
+            <div class="modal-content">
+                <h4>Edit Post</h4>
+                <input type="hidden" id="type" value="editCard">
+                <div class="input-field col s6 ">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="todoTaskName" class="materialize-textarea" value="{{ $todos->taskName }}"></textarea>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">comment</i>
+                    <textarea id="todoTaskDescription" class="materialize-textarea" value="{{ $todos->taskDescription }}"></textarea>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="text" class="datepicker" id="todoStartDate" value="{{$todos->startDate}}">
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="text" class="datepicker" id="todoEndDate" value="{{$todos->endDate}}">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                <a href="#" class="waves-effect waves-green btn-flat" id="editCard">Edit Post</a>
+            </div>
+        </div>
     @endif
 @endsection
 @section('scripts')
     <script>
         $(document).ready(function () {
             $('#modalPost').modal();
+            $('#modalEdit').modal();
             $('#todoStartDate').datepicker();
             $('#todoEndDate').datepicker();
 
@@ -134,6 +163,28 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success: function (data) {
                         location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                })
+            });
+
+            $(document).on('click', '#editCard', function (e) {
+                $.ajax({
+                    url: "{{ route('todo.actions') }}",
+                    type: 'POST',
+                    data: {
+                        type: 'editCard',
+                        taskName: $('#todoTaskName').val(),
+                        taskDescription: $('#todoTaskDescription').val(),
+                        startDate: $('#todoStartDate').val(),
+                        endDate: $('#todoEndDate').val(),
+                        todoID: id,
+
+                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function (data) {
                     },
                     error: function (data) {
                         console.log(data);

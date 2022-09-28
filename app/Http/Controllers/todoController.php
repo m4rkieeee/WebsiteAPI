@@ -47,7 +47,17 @@ class todoController extends Controller
         if ($request->type == 'deleteCard') {
             $todo = Todo::where('id', $request->todoID);
             $todo->delete();
+
+            return 'success';
+
         }
-        return 'success';
+
+        if($request->type == 'editCard') {
+            Todo::where('id', $request->todoID)->update([
+                'taskName' => $request->taskName,
+                'taskDescription' => $request->taskDescription,
+                'startdate' => $request->startDate,
+                'enddate' => $request->endDate
+            ]);}
     }
 }
