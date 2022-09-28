@@ -2,13 +2,12 @@
 @section('title', 'Home')
 @section('content')
 
-    <img src="{{ asset('img/login.jpg') }}" id="bgimage"
-         style=" position: absolute; background: linear-gradient(black, white)">
+    <img src="{{ asset('img/login.jpg') }}" id="bgimage">
     <nav>
         <div class="nav-wrapper blue">
 
             <div class="container">
-                <a href="{{ url('./home') }}" class="brand-logo">Fased</a>
+                <a href="{{ url('./home') }}" class="brand-logo">Portal</a>
                 <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down right" id="navSelector">
                     <li class="active"><a href="{{ url('./home') }}">Home</a></li>
@@ -39,12 +38,16 @@
                             <span class="card-title">{{ $todos->taskName }}</span>
                             <span class="card-content"><b>{{ $todos->taskDescription }}</b></span>
                             <br/>
+                            <hr>
+                            <span class="card-content"><b>Starting:</b> {{ $todos->startdate->format('d F Y') }}</span>
                             <br/>
-                            <span class="card-content">Starting: {{ $todos->startdate->format('d F Y') }}</span>
-                            <br/>
-                            <span class="card-content">Ending: {{ $todos->enddate->format('d F Y') }}</span>
+                            <span class="card-content"><b>Ending:</b> {{ $todos->enddate->format('d F Y') }}</span>
+                            <br />
+                            <span class="card-content"><b>Posted by: </b>{{$todos->user->name}}</span>
                             @if(auth()->user()->id === $todos->user_id && $todos->done === 0)
                                 <button type="button" class="btn-small right blue" id="{{ $todos->id }}" name="finishTodo">Done?</button>
+                            @elseif($todos->done === 0)
+                                <a class="amber-text right"><b>In Progress!</b></a>
                             @else
                                 <a class="green-text right"><b>Finished!</b></a>
                             @endif
@@ -137,11 +140,13 @@
                                         <span class="card-title">' + data['taskName'] + '</span>\
                                         <span class="card-content"><b>' + data['taskDescription'] + '</b></span>\
                                         <br />\
-                                        <br />\
+                                        <hr />\
                                         <span class="card-content">Starting: ' + moment(data['startdate']).format('D MMMM YYYY h:mm') + '</span>\
                                         <br />\
                                         <span class="card-content">Ending: ' + moment(data['enddate']).format('D MMMM YYYY h:mm') + '</span>\
-                                        <button type="button" class="btn-small right">Done?</button>\
+                                        <br />\
+                                                                    <span class="card-content"><b>Posted by: </b>{{$todos->user->name}}</span>\
+                                        <button type="button" class="btn-small right blue">Done?</button>\
                                     </div>\
                                 </div>\
                             </div>'

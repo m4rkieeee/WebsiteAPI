@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class todoController extends Controller
@@ -10,11 +11,12 @@ class todoController extends Controller
     public function index($id)
     {
         $todo = Todo::with('user')->where('id', $id)->firstOrFail();
-
+        $user = User::find($todo->user_id)->name;
         $resources = [
             'post' => $todo,
+            'user' => $user,
         ];
-        return view('post', $resources);
+        return view('post', $resources, $user);
     }
 
     public function actions(Request $request)
