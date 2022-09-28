@@ -40,7 +40,7 @@
                             <br />
                             <span class="card-content">Ending: {{ $todos->enddate->format('d F Y') }}</span>
                             @if(auth()->user()->id === $todos->user_id && $todos->done === 0)
-                                <button type="button" class="btn-small right">Done?</button>
+                                <button type="button" class="btn-small right blue">Done?</button>
                             @else
                                 <a class="green-text right"><b>Finished!</b></a>
                             @endif
