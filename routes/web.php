@@ -27,3 +27,4 @@ Route::post('todo/actions', [App\Http\Controllers\todoController::class, 'action
 Route::get('signout', [AuthController::class, 'signOut'])->name('signOut');
 Route::delete('todo/actions', [App\Http\Controllers\todoController::class, 'actions'])->name('todo.actions');
 
+Route::get('/cards', [App\Http\Controllers\HomeController::class, 'cards'])->name('home');

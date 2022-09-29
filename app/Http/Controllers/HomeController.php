@@ -29,4 +29,9 @@ class HomeController extends Controller
         $users = User::all();
         return view('home', compact('users', 'todo'));
     }
+    public function cards() {
+        $todo = Todo::all();
+        $users = User::all();
+        return view('cards', compact('users', 'todo'));
+    }
 }

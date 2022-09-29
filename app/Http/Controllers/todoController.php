@@ -11,7 +11,7 @@ class todoController extends Controller
 {
     public function index($id)
     {
-        $todo = Todo::with('user')->where('id', $id)->firstOrFail();
+        $todo = Todo::with('user')->where('id', $id)->orderBy('desc', 'id')->firstOrFail();
         $user = User::find($todo->user_id)->name;
         $resources = [
             'post' => $todo,
