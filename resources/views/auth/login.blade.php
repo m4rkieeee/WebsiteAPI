@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Login')
 @section('content')
-    <img src="{{ asset('img/login.jpg') }}" id="bgimage" style="position: absolute; background: linear-gradient(black, white)">
     <div class="section" style="z-index: 10;">
         <main>
             <div style="text-align: center;">

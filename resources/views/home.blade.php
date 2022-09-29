@@ -2,7 +2,6 @@
 @section('title', 'Home')
 @section('content')
 
-    <img src="{{ asset('img/login.jpg') }}" id="bgimage" style="height: 150%;">
     <nav>
         <div class="nav-wrapper blue">
 

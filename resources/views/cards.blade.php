@@ -2,7 +2,6 @@
 @section('title', 'Home')
 @section('content')
 
-    <img src="{{ asset('img/login.jpg') }}" id="bgimage" style="height: 100%;">
     <nav>
         <div class="nav-wrapper blue">
 
@@ -56,7 +55,15 @@
                                 <br/>
                                 <span
                                     class="card-content"><b>Posted by: </b>{{$todos->user->name ?? 'No cards here'}}</span>
+                                @if(auth()->user()->id === $todos->user_id && $todos->done === 0)
+                                    <button type="button" class="btn-small right blue" id="{{ $todos->id }}"
+                                            name="finishTodo">Done?
+                                    </button>
+                                @elseif($todos->done === 0)
+                                    <a class="amber-text right"><b>In Progress!</b></a>
+                                @else
                                     <a class="green-text right"><b>Finished!</b></a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -68,7 +75,7 @@
     <div class="row">
         <h3 style="text-align:center;">Finished Cards</h3>
         @foreach($todo as $todos)
-            @if(auth()->user()->id === $todos->user_id && $todos->done == 1)
+            @if($todos->done == 1)
                 <div class="col s12 m6 l4">
                     <div class="card white">
                         <div class="card-content">

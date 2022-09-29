@@ -22,8 +22,9 @@
         <!-- Scripts -->
     </head>
     <body>
-        <main class="py-4">
-            @yield('content')
+    <main class="py-4">
+        <img src="{{ asset('img/login.jpg') }}" id="bgimage">
+        @yield('content')
         </main>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"></script>
