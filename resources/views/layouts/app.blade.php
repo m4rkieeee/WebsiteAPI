@@ -23,7 +23,6 @@
     </head>
     <body>
     <main class="py-4">
-        <img src="{{ asset('img/login.jpg') }}" id="bgimage">
         @yield('content')
         </main>
 

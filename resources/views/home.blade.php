@@ -125,6 +125,8 @@
                     <label for="todoStartDate">Start Date</label>
                 </div>
                 </div>
+                <br />
+                <br />
                 <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">date_range</i>
