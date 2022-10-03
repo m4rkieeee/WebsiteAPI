@@ -67,6 +67,7 @@
                     </div>
                 </div>
                 @endif
+                <script></script>
             @endforeach
         </div>
     </div>
@@ -322,6 +323,5 @@
     <script>
         const slide_menu = document.querySelectorAll(".sidenav");
         M.Sidenav.init(slide_menu, {});
-
     </script>
 @endsection
