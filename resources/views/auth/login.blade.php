@@ -8,7 +8,7 @@
                 <div class="section">
                     <div class="section"></div>
                     <div class="container">
-                        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0 48px;background-color: white; border: 1px solid #000000;">
+                        <div class="z-depth-1 grey lighten-4 row" id="loginContainer" style="display: inline-block; padding: 32px 48px 0 48px;background-color: white; border: 1px solid #000000;">
                             <form role="form" method="POST" action="{{ route('login.custom') }}">
                                 @csrf
                                 <div class="row">

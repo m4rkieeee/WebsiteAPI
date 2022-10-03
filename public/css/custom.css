@@ -4,6 +4,9 @@ html {
 div {
     z-index: 10;
 }
+.row {
+    border-radius: 10px;
+}
 #bgimage {
     z-index: -1;
     width: 100%;

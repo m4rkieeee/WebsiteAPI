@@ -12,7 +12,7 @@
                 <ul class="hide-on-med-and-down right" id="navSelector">
                     <li class="active"><a href="{{ url('./home') }}">Your Cards</a></li>
                     <li><a href="{{ url('./cards') }}">All Cards</a></li>
-                    <li><a data-target="modalPost" class="modal-trigger">New Post</a></li>
+                    <li><a data-target="modalPost" class="modal-trigger">New Card</a></li>
                     <li><a href="{{ url('./signout') }}">Sign Out</a></li>
                 </ul>
             </div>
