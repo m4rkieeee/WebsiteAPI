@@ -32,7 +32,7 @@ class todoController extends Controller
             $todo->done = 0;
             $todo->save();
 
-            return $todo;
+            return $todo && response()->json($todo, 201);
 
         }
 

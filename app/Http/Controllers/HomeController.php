@@ -23,15 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
-        $todo = Todo::all();
-        $users = User::all();
-        return view('home', compact('users', 'todo'));
+        $todo = Todo::with('user')->get();
+        return view('home', compact('todo'));
     }
     public function cards() {
-        $todo = Todo::all();
-        $users = User::all();
-        return view('cards', compact('users', 'todo'));
+        $todo = Todo::with('user')->get();
+        return view('cards', compact('todo'));
     }
 }

@@ -7,6 +7,7 @@ use App\Models\userRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -43,12 +44,24 @@ class AuthController extends Controller
         }
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255', 'unique:user'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     public function customRegistration(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:users',
             'password' => 'required|min:6',
         ]);
+
+        $this->validator($request->all())->validate();
+        event(new User($user = $this->create($request->all())));
+        $this->guard()->login($user);
 
         $user = new User();
         $user->name = $request->name;
@@ -66,6 +79,14 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('success', 'User created!');
         }
+
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $user->generateToken();
+
+        return response()->json(['data' => $user->toArray()], 201);
     }
 
     public function create(array $data)

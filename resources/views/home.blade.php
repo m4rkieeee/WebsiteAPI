@@ -135,7 +135,6 @@
                     <label for="todoEndDate">End Date</label>
                 </div>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <a href="#" class="modal-close waves-effect waves-green btn amber white-text">Close</a>
